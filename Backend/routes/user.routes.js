@@ -10,6 +10,11 @@ router.post("/register" , [
 
 ], userController.registerUser);
 
+router.post("/login",[
+    body('email').isEmail().withMessage('Please enter a valid email'),
+    body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long')
+], userController.loginUser);
+
 
 
 
