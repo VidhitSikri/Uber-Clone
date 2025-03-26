@@ -15,7 +15,6 @@ const UserLogin = () => {
     })
     setEmail("");
     setPassword("");
-    setUserData({});
   }
 
 

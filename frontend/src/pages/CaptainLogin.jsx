@@ -16,7 +16,6 @@ const CaptainLogin = () => {
 
     setEmail("");
     setPassword("");
-    setCaptainData({});
   }
 
 
