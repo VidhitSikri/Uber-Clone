@@ -12,7 +12,10 @@ app.use(cookieParser());
 
 
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173", // Replace with your frontend's URL
+    credentials: true // Allow cookies to be sent
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
