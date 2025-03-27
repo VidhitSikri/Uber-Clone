@@ -32,7 +32,12 @@ const UserLogin = () => {
     if(response.status === 200){
       const data = response.data;
       setUser(data.user);
+      localStorage.setItem('token', data.token);
       navigate("/home");
+    }
+
+    if(response.status === 404){
+      alert("User not found");
     }
     
 
