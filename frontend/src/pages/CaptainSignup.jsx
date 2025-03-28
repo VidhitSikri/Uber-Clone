@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-
+import { CaptainDataContext } from '../context/CaptainContext'
 
 const CaptainSignup = () => {
 
@@ -9,6 +9,8 @@ const CaptainSignup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [captainData, setCaptainData] = useState({});
+
+    const {captain , setCaptain} = useContext(CaptainDataContext);
 
 
     const handleSubmit = (e) => {
