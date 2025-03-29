@@ -25,7 +25,7 @@ const connectToDb = require("./db/db");
 connectToDb();
 
 app.use("/users", userRoutes);
-app.use("/captain", captainRoutes);
+app.use("/captains", captainRoutes);
 
 app.get("/", (req, res) => {   
     res.send("Hello World!");
