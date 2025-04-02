@@ -6,6 +6,7 @@ import LocationSearchPanel from "../components/LocationSearchPanel";
 import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
+import WaitForDriver from "../components/WaitForDriver";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -14,12 +15,14 @@ const Home = () => {
   const [vehicle, setVehicle] = useState(false);
   const [confirmRide, setConfirmRide] = useState(false);
   const [vehicleFound, setVehicleFound] = useState(false);  
+  const [waitingForDriverPanel, setWaitingForDriverPanel] = useState(false);
 
   const panelRef = useRef(null);
   const panelButtonRef = useRef(null);
   const vehiclePanelRef = useRef(null);
   const confirmRidePanelRef = useRef(null);
   const vehicleFoundRef = useRef(null);
+  const waitingForDriverRef = useRef(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -91,6 +94,20 @@ const Home = () => {
     }
   },[confirmRide]);
 
+
+  useGSAP(() => {
+    if(waitingForDriverPanel){
+      gsap.to(waitingForDriverRef.current, {
+        transform: "translateY(0%)",
+      })
+    }
+    else{
+      gsap.to(waitingForDriverRef.current, {
+        transform: "translateY(100%)",
+      })
+    }
+  },[waitingForDriverPanel]);
+
   return (
     <div className="relative h-screen overflow-hidden">
       <img
@@ -148,7 +165,10 @@ const Home = () => {
         <ConfirmRide setConfirmRide={setConfirmRide} setVehicle={setVehicle} setVehicleFound={setVehicleFound}/>
       </div>
       <div ref={vehicleFoundRef} className="fixed w-full translate-y-full z-10 bottom-0 bg-white px-3 py-6">
-        <LookingForDriver setConfirmRide={setConfirmRide} setVehicle={setVehicle}/>
+        <LookingForDriver setConfirmRide={setConfirmRide} setVehicle={setVehicle} setVehicleFound={setVehicleFound} />
+      </div>
+      <div ref={waitingForDriverRef} className="fixed w-full  z-10 bottom-0 bg-white px-3 py-6">
+        <WaitForDriver waitingForDriverPanel={waitingForDriverPanel} setWaitingForDriverPanel={setWaitingForDriverPanel}/>
       </div>
     </div>
   );
