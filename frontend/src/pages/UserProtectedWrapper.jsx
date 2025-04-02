@@ -26,6 +26,10 @@ const UserProtectedWrapper = ({
             }
         }).then(response => {
             if (response.status === 200) {
+                if(!response.data.user){
+                    localStorage.removeItem('token')
+                    navigate('/login')
+                }
                 setUser(response.data)
                 setIsLoading(false)
             }

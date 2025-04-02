@@ -24,7 +24,12 @@ const CaptainProtectedWrapper = ({
             }
         }).then(response => {
             if (response.status === 200) {
+                if(!response.data.captain){
+                    localStorage.removeItem('token')
+                    navigate('/captain-login')
+                }
                 setCaptain(response.data.captain)
+                console.log(response.data)
                 setIsLoading(false)
             }
         })
