@@ -1,5 +1,5 @@
 const dotenv = require("dotenv").config();
-
+const mapRoutes = require("./routes/maps.routes");
 
 const express = require("express");
 const app = express();
@@ -26,6 +26,7 @@ connectToDb();
 
 app.use("/users", userRoutes);
 app.use("/captains", captainRoutes);
+app.use("/maps", mapRoutes);``
 
 app.get("/", (req, res) => {   
     res.send("Hello World!");
