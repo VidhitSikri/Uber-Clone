@@ -1,17 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const RidePopup = (props) => {
+const FinishRide = (props) => {
   return (
-    <div>
+    <div className="h-screen">
       <h5
         onClick={() => {
-          props.setRidePopUpPanel(false);
+          props.setFinishRidePanel(false);
         }}
         className="p-3 text-center w-[93%] absolute top-0 text-gray-500"
       >
         <i className="text-xl ri-arrow-down-s-line"></i>
       </h5>
-      <h3 className="text-2xl font-semibold mb-5">New ride available!</h3>
+      <h3 className="text-2xl font-semibold mb-5">
+        finish this ride
+      </h3>
 
       <div className="mt-3 flex items-center justify-between gap-5 pl-2 pr-2 pt-2 pb-2 rounded-lg bg-yellow-400">
         <div className="flex items-center gap-5">
@@ -53,25 +56,19 @@ const RidePopup = (props) => {
             </div>
           </div>
         </div>
-        <button
-          onClick={() => {
-            props.setConfirmRidePopUpPanel(true);
-          }}
-          className="mt-3 w-full bg-green-500 text-white font-semibold rounded-lg p-2"
+
+        <div className="mt-6 flex flex-col gap-3 w-full">
+        <Link 
+            to={"/captain-home"}
+            type="submit"
+            className="w-full flex items-center justify-center  mb-2 mt-8 hover:bg-black hover:text-white  bg-green-500  text-white font-semibold rounded-lg py-3 transition duration-300"
         >
-          Accept
-        </button>
-        <button
-          onClick={() => {
-            props.setRidePopUpPanel(false);
-          }}
-          className=" w-full bg-gray-300 text-gray-700 font-semibold rounded-lg p-2"
-        >
-          Ignore
-        </button>
+            Finish ride
+        </Link>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RidePopup;
+export default FinishRide

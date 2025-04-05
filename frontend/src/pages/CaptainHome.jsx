@@ -1,13 +1,54 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CaptainDetails from "../components/CaptainDetails";
 import RidePopup from "../components/RidePopup";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import ConfirmRidePopup from "../components/ConfirmRidePopup";
 
 const CaptainHome = () => {
+
+  const [ridePopUpPanel, setRidePopUpPanel] = useState(true);
+  const [confrimRidePopUpPanel, setConfirmRidePopUpPanel] = useState(false);
+
+
+
+  const ridePopUpref = useRef(null);
+  const confirmRidePopUpref = useRef(null);
+
+  useGSAP(() => {
+    if(ridePopUpPanel){
+      gsap.to(ridePopUpref.current, {
+        transform: "translateY(0%)",
+      })
+    }
+    else{
+      gsap.to(ridePopUpref.current, {
+        transform: "translateY(100%)",
+      })
+    }
+  },[ridePopUpPanel]);
+
+
+  useGSAP(() => {
+    if(confrimRidePopUpPanel){
+      gsap.to(confirmRidePopUpref.current, {
+        transform: "translateY(0%)",
+      })
+    }
+    else{
+      gsap.to(confirmRidePopUpref.current, {
+        transform: "translateY(100%)",
+      })
+    }
+  },[confrimRidePopUpPanel]);
+
+
+
   return (
     <div className="h-screen relative overflow-hidden">
       {/* Header */}
-      <div className="fixed p-3 top-0 flex items-center justify-between w-full bg-white z-20">
+      <div className="fixed p-3 top-0 flex items-center justify-between w-full  z-20">
         <img
           className="w-16"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
@@ -35,11 +76,17 @@ const CaptainHome = () => {
       </div>
 
       {/* Ride Popup */}
-      <div
-        className="fixed bottom-0 left-0 w-full z-30 bg-white px-5 py-6 rounded-t-2xl transition-all duration-500"
-        style={{ height: "60%" }}
+      <div ref={ridePopUpref} 
+        className="fixed translate-y-full bottom-0 left-0 w-full z-30 bg-white px-5 py-12 rounded-t-2xl "
+        style={{ height: "65%" }}
       >
-        <RidePopup />
+        <RidePopup ridePopUpPanel={ridePopUpPanel} setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} />
+      </div>
+      <div ref={confirmRidePopUpref} 
+        className="fixed translate-y-full bottom-0 left-0 w-full z-30 bg-white px-5 py-12 rounded-t-2xl "
+        style={{ height: "100%" }}
+      >
+        <ConfirmRidePopup ridePopUpPanel={ridePopUpPanel} setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} />
       </div>
     </div>
   );

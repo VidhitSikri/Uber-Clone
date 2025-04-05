@@ -13,7 +13,7 @@ const CaptainDetails = () => {
             <p className='text-sm  text-gray-600'>Earned</p>
           </div>
         </div>
-        <div className='flex p-3 mt-6 bg-gray-200 rounded-xl gap-3 justify-center items-start'>
+        <div className='flex p-2 mt-6 bg-gray-200 rounded-xl gap-3 justify-center items-start'>
 
 
           <div className='text-center'>
