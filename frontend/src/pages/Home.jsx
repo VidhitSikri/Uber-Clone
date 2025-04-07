@@ -149,6 +149,8 @@ const Home = () => {
   async function findTrip(){
     setVehicle(true);
     setPanel(false);
+    setVehicleFound(false);
+
 
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/get-fare`, {
       params: { pickup, destination },
@@ -238,7 +240,7 @@ const Home = () => {
       <div ref={confirmRidePanelRef} className="fixed w-full translate-y-full z-10 bottom-0 bg-white px-3 py-6">
         <ConfirmRide fare={fare} pickup={pickup} destination={destination} vehicleType={vehicleType} createRide={createRide}  setConfirmRide={setConfirmRide} setVehicle={setVehicle} setVehicleFound={setVehicleFound}/>
       </div>
-      <div ref={vehicleFoundRef} className="fixed w-full translate-y-full z-10 bottom-0 bg-white px-3 py-6">
+      <div ref={vehicleFoundRef} className="fixed w-full translate-y-[140%] z-10 bottom-0 bg-white px-3 py-6">
         <LookingForDriver fare={fare} pickup={pickup} destination={destination} vehicleType={vehicleType} setConfirmRide={setConfirmRide} setVehicle={setVehicle} setVehicleFound={setVehicleFound} />
       </div>
       <div ref={waitingForDriverRef} className="fixed w-full  z-10 bottom-0 bg-white px-3 py-6">
