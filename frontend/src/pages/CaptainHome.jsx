@@ -22,7 +22,45 @@ const CaptainHome = () => {
   useEffect(() => {
       sendMessage('join', {userType: "captain", userId: captain._id})
       console.log( captain, captain._id);
-    })
+
+
+      const updateLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+
+
+              console.log({
+                location: {
+                  ltd: position.coords.latitude,
+                  lng: position.coords.longitude
+                }
+              })
+
+                sendMessage('update-location-captain', {
+
+                  
+
+                  
+                    userId: captain._id,
+                    location: {
+                        ltd: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                })
+            })
+        }
+    }
+
+    const locationInterval = setInterval(updateLocation, 10000)
+    updateLocation()
+
+
+    },[])
+
+    recieveMessage('new-ride', (data) => {
+      console.log(data);
+
+    });
 
 
 
