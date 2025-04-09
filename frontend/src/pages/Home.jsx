@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
@@ -8,6 +8,10 @@ import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitForDriver from "../components/WaitForDriver";
+import { SocketContext } from "../context/SocketContext";
+import { UserDataContext } from "../context/UserContext";
+
+
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -21,6 +25,14 @@ const Home = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
+
+  const { sendMessage, recieveMessage } = useContext(SocketContext);
+  const { user } = useContext(UserDataContext);
+
+  useEffect(() => {
+    sendMessage('join', {userType: "user", userId: user._id})
+    console.log( user, user._id);
+  })
 
 
   const panelRef = useRef(null);
