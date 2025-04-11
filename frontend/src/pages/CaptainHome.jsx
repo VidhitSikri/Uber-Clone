@@ -163,7 +163,7 @@ const CaptainHome = () => {
         className="fixed translate-y-full bottom-0 left-0 w-full z-30 bg-white px-5 py-12 rounded-t-2xl "
         style={{ height: "100%" }}
       >
-        <ConfirmRidePopup ridePopUpPanel={ridePopUpPanel} setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} />
+        <ConfirmRidePopup ride={ride} ridePopUpPanel={ridePopUpPanel} setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} />
       </div>
     </div>
   );

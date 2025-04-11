@@ -85,3 +85,30 @@ module.exports.confirmRide = async (req, res, next) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+
+module.exports.startRide = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { rideId, otp } = req.query;
+
+    console.log('rideId:', rideId, 'otp:', otp);
+
+    try {
+        const ride = await rideService.startRide({ rideId, otp, captain: req.captain });
+
+        console.log(ride);
+
+        sendMessageToSocketId(ride.user.socketId, {
+            event: 'ride-started',
+            data: ride
+        })
+
+        return res.status(200).json(ride);
+    } catch (err) {
+        return res.status(500).json( "internal fucking server error" );
+    }
+}

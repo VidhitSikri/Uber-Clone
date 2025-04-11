@@ -10,6 +10,7 @@ import LookingForDriver from "../components/LookingForDriver";
 import WaitForDriver from "../components/WaitForDriver";
 import { SocketContext } from "../context/SocketContext";
 import { UserDataContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -27,6 +28,9 @@ const Home = () => {
   const [vehicleType, setVehicleType] = useState(null);
   const [ride, setRide] = useState(null);
 
+
+  const navigate = useNavigate();
+
   const { sendMessage, recieveMessage } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
 
@@ -34,6 +38,14 @@ const Home = () => {
     sendMessage('join', {userType: "user", userId: user._id})
     console.log( user, user._id);
   })
+
+
+  recieveMessage('ride-started', ride => {
+    setWaitingForDriverPanel(false);
+    navigate('/riding')
+  })
+
+
 
 
   const panelRef = useRef(null);
