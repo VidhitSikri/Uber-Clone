@@ -42,7 +42,7 @@ const Home = () => {
 
   recieveMessage('ride-started', ride => {
     setWaitingForDriverPanel(false);
-    navigate('/riding')
+    navigate('/riding', {state: { ride }})
   })
 
 
