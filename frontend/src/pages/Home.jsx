@@ -25,6 +25,7 @@ const Home = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
+  const [ride, setRide] = useState(null);
 
   const { sendMessage, recieveMessage } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
@@ -74,6 +75,7 @@ const Home = () => {
     setVehicleFound(false);
     setWaitingForDriverPanel(true);
     setVehicle(false);
+    setRide(ride);
   })
 
   const handleSelectSuggestion = (suggestion) => {
@@ -262,7 +264,9 @@ const Home = () => {
         <LookingForDriver fare={fare} pickup={pickup} destination={destination} vehicleType={vehicleType} setConfirmRide={setConfirmRide} setVehicle={setVehicle} setVehicleFound={setVehicleFound} />
       </div>
       <div ref={waitingForDriverRef} className="fixed w-full  z-10 bottom-0 bg-white px-3 py-6">
-        <WaitForDriver waitingForDriverPanel={waitingForDriverPanel} setWaitingForDriverPanel={setWaitingForDriverPanel}/>
+        <WaitForDriver 
+          ride={ride} 
+         waitingForDriverPanel={waitingForDriverPanel} setWaitingForDriverPanel={setWaitingForDriverPanel}/>
       </div>
     </div>
   );
