@@ -64,7 +64,7 @@ const CaptainRiding = () => {
       onClick={() => {setFinishRidePanel(true)}}>
       <h5
         onClick={() => {
-          props.setRidePopUpPanel(false);
+          
         }}
         className="p-3 text-center w-[93%] top-0 rotate-180 absolute  text-gray-500"
         >
