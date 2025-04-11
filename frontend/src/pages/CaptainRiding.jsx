@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import FinishRide from '../components/FinishRide';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import LiveTracking from '../components/LiveTracking';
 
 const CaptainRiding = () => {
 
@@ -53,11 +54,7 @@ const CaptainRiding = () => {
 
       {/* Main Content */}
       <div className="h-4/5">
-        <img
-          src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
-          alt=""
-          className="h-full w-full object-cover"
-        />
+        <LiveTracking/>
       </div>
 
       <div className="bottom-0 h-[20vh] p-6 flex items-center relative justify-between bg-yellow-400"
