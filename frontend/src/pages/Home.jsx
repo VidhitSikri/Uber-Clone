@@ -70,6 +70,12 @@ const Home = () => {
     }
   }, [pickup, destination, activeField]);
 
+  recieveMessage('ride-confirmed' , ride =>{
+    setVehicleFound(false);
+    setWaitingForDriverPanel(true);
+    setVehicle(false);
+  })
+
   const handleSelectSuggestion = (suggestion) => {
     const value = suggestion.description || suggestion;
     if(activeField === 'pickup'){

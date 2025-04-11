@@ -8,14 +8,16 @@ import ConfirmRidePopup from "../components/ConfirmRidePopup";
 import { useContext } from "react";
 import { CaptainDataContext } from "../context/CaptainContext";
 import { SocketContext } from "../context/SocketContext";
+import axios from "axios";
 
 const CaptainHome = () => {
 
   const { sendMessage, recieveMessage } = useContext(SocketContext);
   const { captain } = useContext(CaptainDataContext);
 
-  const [ridePopUpPanel, setRidePopUpPanel] = useState(true);
+  const [ridePopUpPanel, setRidePopUpPanel] = useState(false);
   const [confrimRidePopUpPanel, setConfirmRidePopUpPanel] = useState(false);
+  const [ride, setRide] = useState(null);
 
 
 
@@ -59,6 +61,8 @@ const CaptainHome = () => {
 
     recieveMessage('new-ride', (data) => {
       console.log(data);
+      setRide(data);
+      setRidePopUpPanel(true);
 
     });
 
@@ -68,6 +72,22 @@ const CaptainHome = () => {
 
   const ridePopUpref = useRef(null);
   const confirmRidePopUpref = useRef(null);
+
+
+
+
+  async function confirmRide() {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`, {
+      rideId: ride._id,
+      captainId: captain._id,
+      
+      
+    },{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+  }
 
   useGSAP(() => {
     if(ridePopUpPanel){
@@ -81,6 +101,10 @@ const CaptainHome = () => {
       })
     }
   },[ridePopUpPanel]);
+
+
+
+
 
 
   useGSAP(() => {
@@ -133,7 +157,7 @@ const CaptainHome = () => {
         className="fixed translate-y-full bottom-0 left-0 w-full z-30 bg-white px-5 py-12 rounded-t-2xl "
         style={{ height: "65%" }}
       >
-        <RidePopup ridePopUpPanel={ridePopUpPanel} setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} />
+        <RidePopup ride={ride} ridePopUpPanel={ridePopUpPanel} setRidePopUpPanel={setRidePopUpPanel} setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} confirmRide={confirmRide} />
       </div>
       <div ref={confirmRidePopUpref} 
         className="fixed translate-y-full bottom-0 left-0 w-full z-30 bg-white px-5 py-12 rounded-t-2xl "

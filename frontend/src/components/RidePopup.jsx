@@ -20,7 +20,7 @@ const RidePopup = (props) => {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8146Eq20RNZtIptJW65OV97CxVGvSUoIESg&s"
             alt=""
           />
-          <h2 className="text-lg font-medium">Harsh Patel</h2>
+          <h2 className="text-lg font-medium">{props.ride?.user.fullname.firstname + " " + props.ride?.user.fullname.lastname}</h2>
         </div>
         <h5 className="text-lg font-semibold">2.2km</h5>
       </div>
@@ -30,25 +30,25 @@ const RidePopup = (props) => {
           <div className="flex items-center gap-5 p-2 border-b-2 border-gray-300">
             <i className="text-lg ri-map-pin-2-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
+              <h3 className="text-lg font-medium">Pickup</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kankariya Talab, Ahemdabad
+                {props.ride?.pickup}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-2 border-b-2 border-gray-300">
             <i className="text-lg ri-map-pin-2-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
+              <h3 className="text-lg font-medium">Destination</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kankariya Talab, Ahemdabad
+                {props.ride?.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 pt-2 pl-2">
             <i className="ri-money-rupee-circle-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">198</h3>
+              <h3 className="text-lg font-medium">{props.ride?.fare}</h3>
               <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
             </div>
           </div>
@@ -56,6 +56,7 @@ const RidePopup = (props) => {
         <button
           onClick={() => {
             props.setConfirmRidePopUpPanel(true);
+            props.confirmRide()
           }}
           className="mt-3 w-full bg-green-500 text-white font-semibold rounded-lg p-2"
         >
