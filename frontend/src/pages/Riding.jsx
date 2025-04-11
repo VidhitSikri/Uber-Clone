@@ -1,9 +1,20 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { useEffect, useContext } from 'react'
+import { SocketContext } from '../context/SocketContext'
+import { useNavigate } from 'react-router-dom'
 
 const Riding = () => {
     const location = useLocation()
     const { ride } = location.state || {}
+    const { sendMessage ,  recieveMessage  } = useContext(SocketContext)
+    const navigate = useNavigate()
+
+
+    recieveMessage('ride-ended', () => {
+        navigate('/home')
+    })
 
 
   return (

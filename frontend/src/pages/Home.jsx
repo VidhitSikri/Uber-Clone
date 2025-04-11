@@ -73,6 +73,8 @@ const Home = () => {
         const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, 
           { params: { input },
         headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} });
+
+        
         setSuggestions(response.data);
       } catch (error) {
         console.error(error);

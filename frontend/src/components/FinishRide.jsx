@@ -1,7 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FinishRide = (props) => {
+
+
+  const navigate = useNavigate()
+
+
+
+  async function endRide() {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/end-ride`, {
+      rideId: props.ride._id,
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    })
+
+
+    if(response.status === 200) {
+      props.setFinishRidePanel(false);
+      navigate('/captain-home')
+    }
+
+
+
+  }
+
+
+
+
   return (
     <div className="h-screen">
       <h5
@@ -58,13 +89,14 @@ const FinishRide = (props) => {
         </div>
 
         <div className="mt-6 flex flex-col gap-3 w-full">
-        <Link 
-            to={"/captain-home"}
+        <button 
+
+            onClick={endRide}
             type="submit"
             className="w-full flex items-center justify-center  mb-2 mt-8 hover:bg-black hover:text-white  bg-green-500  text-white font-semibold rounded-lg py-3 transition duration-300"
         >
             Finish ride
-        </Link>
+        </button>
         </div>
       </div>
     </div>
