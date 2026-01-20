@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 const cors = require("cors");
 app.use(cors({
-    origin: ["http://localhost:5173", "https://1mzjpr0b-5173.inc1.devtunnels.ms"],
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
     credentials: true
 }));
 
