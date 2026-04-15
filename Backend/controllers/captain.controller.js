@@ -52,7 +52,7 @@ module.exports.loginCaptain = async (req, res, next) => {
     const isMatch = await captain.comparePassword(password);
 
     if (!isMatch) {
-        return res.status(401).json({ message: 'Invalid email or password.....' });
+        return res.status(401).json({ message: 'Invalid email or password' });
     }
 
     const token = captain.generateAuthToken();
